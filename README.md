@@ -22,6 +22,9 @@
 - Only accessible to logged in users
 - A user is able to create a post with the attributes title, description, and a photo.
 
+### Posts
+- Displays a list of all the user's posts
+
 ## Views
 ### Login
 - Form containing required email and password fields. A button to request to log user in.
