@@ -7,9 +7,7 @@ exports.user_list = async (req, res) => {
     res.send(`${JSON.stringify(data)}`);
 };
 
-exports.user_create_post = (req, res) => {
-    console.log(res);
-    console.log(req);
-
-    res.send("NOT IMPLEMENTED: User create POST");
+exports.user_create_post = async (req, res) => {
+    const data = await UserRepository.createUser(req.body.user);
+    res.send(`${JSON.stringify(data)}`);
 };
