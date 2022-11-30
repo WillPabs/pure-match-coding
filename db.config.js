@@ -8,6 +8,8 @@ const connect = () => {
     const database = process.env.DB;
     const dialect = 'postgres';
 
+    console.log(database);
+
     const sequelize = new Sequelize(database, userName, password, {
         host: hostName,
         dialect: dialect,
