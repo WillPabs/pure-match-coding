@@ -1,16 +1,31 @@
-import { v4 as uuidv4 } from 'uuid';
+module.exports = (sequelize, DataTypes, Model) => {
 
-const User = (name, email, password) => {
-    let obj = Object.create(userFunctions);
-    obj.id = uuidv4();
-    obj.name = name;
-    obj.email = email;
-    obj.password = password;
-    return obj;
-}
+    class Users extends Model {}
 
-const userFunctions = {
+    Users.init({
+        id: {
+            type: DataTypes.UUID,
+            primaryKey: true,
+            allowNull: false,
+            unique: true,
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
+    }, {
+        sequelize,
+        modelName: 'users',
+        timestamps: false
+    });
 
+    return Users;
 };
-
-export default User;
