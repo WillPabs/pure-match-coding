@@ -1,5 +1,4 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
-const logger = require('../logger/api.logger');
 
 const connect = () => {
 
@@ -7,12 +6,14 @@ const connect = () => {
     const userName = process.env.USER;
     const password = process.env.PASSWORD;
     const database = process.env.DB;
-    const dialect = process.env.DIALECT;
+    const dialect = 'postgres';
+
+    console.log(process.env);
 
     const sequelize = new Sequelize(database, userName, password, {
         host: hostName,
         dialect: dialect,
-        operatorsAliases: false,
+        operatorsAliases: 0,
         pool: {
             max: 10,
             min: 0,
@@ -24,7 +25,7 @@ const connect = () => {
     const db = {};
     db.Sequelize = Sequelize;
     db.sequelize = sequelize;
-    db.tasks = require("../model/user.model")(sequelize, DataTypes, Model);
+    db.user = require('./model/user')(sequelize, DataTypes, Model);
 
     return db;
 
