@@ -14,7 +14,7 @@ class UserRepository {
         try {
             const users = await this.db.users.findAll();
             console.log('users:::', users);
-            return tasks;
+            return users;
         } catch (e) {
             console.log(e);
             return [];
@@ -25,11 +25,40 @@ class UserRepository {
         let data = {};
         try {
             data = await this.db.users.create(user);
+            console.log(data);
         } catch (e) {
             console.log(e);   
         }
         return data;
     }
+
+    async updateUser(user) {
+        let data = {};
+        try {
+            data = await this.db.users.update({...user}, {
+                where: {
+                    id: user.id
+                }
+            });
+        } catch (e) {
+            console.log(e);
+        }
+        return data;
+    }
+
+    async deleteUser(userId) {
+        let data = {};
+        try {
+            data = await this.db.users.destroy({
+                where: {
+                    id: userId
+                }
+            });
+        } catch (e) {
+            console.log(e);
+        }
+        return data;
+    }
 }
 
-module.exports = UserRepository;
+module.exports = new UserRepository();
