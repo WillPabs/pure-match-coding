@@ -24,7 +24,14 @@ class UserRepository {
     async createUser(user) {
         let data = {};
         try {
-            data = await this.db.users.create(user);
+            console.log('Creating user:::', user);
+            const newId = uuid(); // generate uuid automatically
+            data = await this.db.users.create({
+                id: newId,
+                name: user.name,
+                email: user.email,
+                password: user.password
+            });
             console.log(data);
         } catch (e) {
             console.log(e);   
