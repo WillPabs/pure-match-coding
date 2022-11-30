@@ -2,21 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 const UserRepository = require('../repository/user');
+const user_controller = require('../controllers/userController');
 
 /* GET users listing. */
 router.get('/', async (req, res, next) => {
-  res.send('respond with a resource');
+  res.send('Users listing');
 });
 
-router.get('/users', async (req, res) => {
-  const data = await UserRepository.getUsers();
-  console.log(`${JSON.stringify(data)}`);
-  res.send(`${JSON.stringify(data)}`);
-});
+router.get('/users', user_controller.user_list);
 
-router.put('/user', async (req, res) => {
-  console.log(req.body);
-  await UserRepository.createUser(req.body.user).then(data => res.json(data));
-});
+router.put('/user', user_controller.user_create_post);
 
 module.exports = router;
