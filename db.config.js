@@ -2,10 +2,10 @@ const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const connect = () => {
 
-    const hostName = process.env.HOST;
+    const hostName = 'localhost';
     const userName = 'postgres';
     const password = 'pass';
-    const database = process.env.DB;
+    const database = 'postgres';
     const dialect = 'postgres';
 
     console.log(database);
