@@ -1,4 +1,5 @@
 const { connect } = require("../db.config");
+const { v4 : uuidv4 } = require('uuid');
 
 class UserRepository {
     db = {};
@@ -25,7 +26,7 @@ class UserRepository {
         let data = {};
         try {
             console.log('Creating user:::', user);
-            const newId = uuid(); // generate uuid automatically
+            const newId = uuidv4(); // generate uuid automatically
             data = await this.db.users.create({
                 id: newId,
                 name: user.name,
