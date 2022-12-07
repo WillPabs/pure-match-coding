@@ -22,6 +22,21 @@ class UserRepository {
         }
     }
 
+    async getUserById(id) {
+        try {
+            const found = await this.db.users.findAll({
+                where: {
+                    id : id
+                }
+            });
+            console.log(`user:::`, found);
+            return found;
+        } catch (e) {
+            console.log(e);
+            return [];
+        }
+    }
+
     async createUser(user) {
         let data = {};
         try {
