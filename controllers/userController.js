@@ -19,5 +19,7 @@ exports.user_get = async (req, res) => {
 }
 
 exports.user_login = async (req, res) => {
-    // const data = awaituserRepository.
+    console.log(req.body);
+    const data = await UserRepository.getUserByEmail(req.body.email);
+    res.send(`${JSON.stringify(data)}`);
 }
