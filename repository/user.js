@@ -14,7 +14,6 @@ class UserRepository {
     async getUsers() {
         try {
             const users = await this.db.users.findAll();
-            console.log('users:::', users);
             return users;
         } catch (e) {
             console.log(e);
@@ -24,11 +23,7 @@ class UserRepository {
 
     async getUserById(id) {
         try {
-            const found = await this.db.users.findAll({
-                where: {
-                    id : id
-                }
-            });
+            const found = await this.db.users.findByPk(id);
             console.log(`user:::`, found);
             return found;
         } catch (e) {
@@ -39,7 +34,7 @@ class UserRepository {
 
     async getUserByEmail(email) {
         try {
-            const found = await this.db.users.findAll({
+            const found = await this.db.users.findOne({
                 where: {
                     email : email
                 }
@@ -52,13 +47,21 @@ class UserRepository {
         }
     }
 
+    async checkEmailAndPassword(email, password) {
+        try {
+            const user = await this.getUserByEmail(email);
+            return user.password === password ? true : false;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
     async createUser(user) {
         let data = {};
         try {
             console.log('Creating user:::', user);
-            const newId = uuidv4(); // generate uuid automatically
             data = await this.db.users.create({
-                id: newId,
+                id: uuidv4(),
                 name: user.name,
                 email: user.email,
                 password: user.password
@@ -96,6 +99,16 @@ class UserRepository {
             console.log(e);
         }
         return data;
+    }
+
+    async deleteAll() {
+        try {
+            await this.db.users.destroy({
+                truncate: true
+            });
+        } catch (e) {
+            console.log(e);
+        }
     }
 }
 

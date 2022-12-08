@@ -8,8 +8,12 @@ router.get('/', user_controller.user_list);
 
 router.get('/:userId', user_controller.user_get);
 
-router.post('/user', user_controller.user_create_post);
+router.post('/', user_controller.user_register);
 
 router.post('/login', user_controller.user_login);
+
+router.delete('/:userId', user_controller.user_delete);
+
+router.delete('/delete/all', user_controller.user_delete_all);
 
 module.exports = router;
