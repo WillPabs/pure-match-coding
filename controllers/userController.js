@@ -41,16 +41,8 @@ exports.user_login = async (req, res) => {
             return res.status(401).send({ message: 'Invalid Password!'});
         }
 
-        const token = jwt.sign({ id: user.id }, 'secret');
-        console.log('req:::',req);
-        req.cookies = token;
-        console.log('***cookies:::',req.cookies);
-        return res.status(200).send({
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            token: token
-        });
+        const token = jwt.sign(user, 'secret');
+        return res.status(200).json(token);
     } catch (e) {
         console.log(e);
         return res.status(500).send({ message: 'Error attempting to login' });

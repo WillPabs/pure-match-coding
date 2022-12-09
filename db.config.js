@@ -1,14 +1,12 @@
 const { Sequelize, Model, DataTypes } = require("sequelize");
 
 const connect = () => {
-
+    
     const hostName = 'localhost';
     const userName = 'postgres';
     const password = 'pass';
     const database = 'postgres';
     const dialect = 'postgres';
-
-    console.log(database);
 
     const sequelize = new Sequelize(database, userName, password, {
         host: hostName,
@@ -28,7 +26,6 @@ const connect = () => {
     db.users = require('./model/user')(sequelize, DataTypes, Model);
 
     return db;
-
 }
 
 module.exports = {
