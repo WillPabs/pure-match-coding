@@ -24,7 +24,7 @@ exports.user_get = async (req, res) => {
     const { userId } = req.params;
     console.log(userId);
     const data = await UserRepository.getUserById(userId);
-    res.send(`${JSON.stringify(data)}`);
+    res.json(data);
 }
 
 exports.user_login = async (req, res) => {

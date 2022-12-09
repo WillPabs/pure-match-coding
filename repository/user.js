@@ -40,7 +40,7 @@ class UserRepository {
                 }
             });
             console.log(`user:::`, found);
-            return found.dataValues;
+            return found;
         } catch (e) {
             console.log(e);
             return [];
