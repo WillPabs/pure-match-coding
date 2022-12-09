@@ -1,12 +1,15 @@
 const jwt = require('jsonwebtoken');
 
-const verifyJWT = (token, secretKey) => {
+const verifyJWT = (req, res, next) => {
+    const token = req.cookies.id;
+    const secret = 'secretKey';
     try {
-        const decoded = jwt.verify(token, secretKey);
-        return decoded;
+        const decoded = jwt.verify(token, secret);
+        req.user = decoded.user;
+        next();
     } catch (e) {
         console.log(e);
-        return null;
+        res.status(401).send("Unable to verify token");
     }
 }
 
