@@ -2,9 +2,12 @@ const jwt = require('jsonwebtoken');
 
 const verifyJWT = (req, res, next) => {
     const token = req.cookies.id;
+    console.log("TOK:::",token);
     const secret = 'secretKey';
     try {
-        const decoded = jwt.verify(token, secret);
+        const decoded = jwt.verify(token, secret, (err, user) => {
+            if (err) return res.sendStatus(403);
+        });
         req.user = decoded.user;
         next();
     } catch (e) {
@@ -15,7 +18,7 @@ const verifyJWT = (req, res, next) => {
 
 const createJWT = (user, secretKey) => {
     try {
-        const token = jwt.sign({ user: user}, secretKey);
+        const token = jwt.sign({ user: user}, secretKey, { expiresIn: '10s' });
         return token;
     } catch (e) {
         console.log(e);
