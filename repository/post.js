@@ -7,8 +7,8 @@ class PostRepository {
     constructor() {
         this.db = connect();
         // this.db.sequelize.sync({ force: true }).then(() => {
-        //         console.log("Drop and re-sync db.");
-        //     });
+        //     console.log("Drop and re-sync db.");
+        // });
         }
         
     async getAllPosts() {
