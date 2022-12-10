@@ -1,14 +1,31 @@
-import { v4 as uuidv4 } from 'uuid';
+module.exports = (sequelize, DataTypes, Model) => {
 
-const Post = (title, description, photo=undefined) => {
-    let obj = Object.create(postFunctions);
-    obj.id = uuidv4();
-    obj.title = title;
-    obj.description = description;
-    obj.photo = photo;
-    return obj;
-}
+    class Posts extends Model {}
 
-const postFunctions = {};
+    Posts.init({
+        id: {
+            type: DataTypes.UUID,
+            primaryKey: true,
+            allowNull: false,
+            unique: true,
+        },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        photo: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
+    }, {
+        sequelize,
+        modelName: 'posts',
+        timestamps: false
+    });
 
-export default Post;
+    return Posts;
+};
