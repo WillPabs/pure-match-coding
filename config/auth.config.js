@@ -1,8 +1,8 @@
 module.exports = {
     secret: 'secretKey',
     // for test
-    jwtExpiration: 10,
-    jwtRefreshExpiration: 20,
+    jwtExpiration: 1000,
+    jwtRefreshExpiration: 2000,
 
     // for prod
     // jwtExpiration: 60,
