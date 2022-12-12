@@ -30,6 +30,49 @@ exports.post_create = async (req, res) => {
     }
 }
 
+exports.post_get = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        if (postId === null || postId === undefined) {
+            return res.status(403).send({ message: 'No Post Id Entered'});
+        }
+
+        const post = await PostRepository.getPostById(postId);
+        if (!post) {
+            return res.status(404).send({ message: 'No Post Found' });
+        }
+
+        return res.send(post);
+    } catch (e) {
+        console.log(e);
+        res.send({ message: e });
+    }
+}
+
+exports.post_update = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        const { post } = req.body;
+        const newPost = await PostRepository.updatePost(post);
+        return res.status(200).send(newPost);
+    } catch (e) {
+        console.log(e);
+        res.send({ message: e });
+    }
+}
+
+exports.post_delete = async (req, res) => {
+    try {
+        const { postId } = req.params;
+        await PostRepository.deletePost(postId);
+        return res.status(200).send(`Successfully deleted post: ${postId}`);
+        
+    } catch (e) {
+        console.log(e);
+        res.send({ message: e });
+    }
+}
+
 exports.all_users_posts = async (req, res) => {
     const posts = await PostRepository.getAllPosts();
     return res.json(posts);
