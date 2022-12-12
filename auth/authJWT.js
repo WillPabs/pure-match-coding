@@ -5,11 +5,16 @@ const verifyJWT = (req, res, next) => {
     console.log("TOK:::",token);
     const secret = 'secretKey';
     try {
-        const decoded = jwt.verify(token, secret, (err, user) => {
-            if (err) return res.sendStatus(403);
+        if (token === null || token === undefined) 
+            return res.status(403).send({ message: 'Please Login' });
+        jwt.verify(token, secret, (err, user) => {
+            if (err) 
+                return res.status(403).send({ message: err});
+            else {
+                req.user = user;
+                next();
+            }
         });
-        req.user = decoded.user;
-        next();
     } catch (e) {
         console.log(e);
         res.status(401).send("Unable to verify token");
