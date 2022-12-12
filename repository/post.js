@@ -23,7 +23,11 @@ class PostRepository {
 
     async getPostsByUser(userId) {
         try {
-            const found = await this.db.posts.findByPk(userId);
+            const found = await this.db.posts.findAll({
+                where: {
+                    userId: userId
+                }
+            });
             console.log(`***Posts by User:::`, found);
             return found;
         } catch (e) {
