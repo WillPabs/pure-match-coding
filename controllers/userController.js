@@ -1,7 +1,6 @@
 const UserRepository = require('../repository/user');
 const authJWT = require('../auth/authJWT');
-
-const secret = 'secretKey';
+const config = require('../config/auth.config');
 
 exports.user_list = async (req, res) => {
     const data = await UserRepository.getUsers();
@@ -42,7 +41,7 @@ exports.user_login = async (req, res) => {
             return res.status(401).send({ message: 'Invalid Password!'});
         }
 
-        const token = authJWT.createJWT(user, secret);
+        const token = authJWT.createJWT(user);
         res.cookie('id', token);
         return res.status(200).redirect('/posts');
     } catch (e) {

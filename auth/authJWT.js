@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const config = require('../config/auth.config');
 
 const verifyJWT = (req, res, next) => {
     const token = req.cookies.id;
@@ -9,7 +10,7 @@ const verifyJWT = (req, res, next) => {
             return res.status(403).send({ message: 'Please Login' });
         jwt.verify(token, secret, (err, user) => {
             if (err) 
-                return res.status(403).send({ message: err});
+                return res.status(401).send({ message: err});
             else {
                 req.user = user;
                 next();
@@ -21,9 +22,9 @@ const verifyJWT = (req, res, next) => {
     }
 }
 
-const createJWT = (user, secretKey) => {
+const createJWT = (user) => {
     try {
-        const token = jwt.sign({ user: user}, secretKey, { expiresIn: '10s' });
+        const token = jwt.sign({ user: user}, config.secret, { expiresIn: '10s' });
         return token;
     } catch (e) {
         console.log(e);
