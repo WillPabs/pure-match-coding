@@ -12,18 +12,22 @@
 - photo
 
 ## Routes
-### Register
-- A user is able to to create an account by filling out the form with required fields: name, email, and password
-
-### Login
-- A user is able to login to their account by entering their email and password into the form. Upon successful login the user receives a JWT token.
-
-### Create Post
-- Only accessible to logged in users
-- A user is able to create a post with the attributes title, description, and a photo.
+### Users
+- get user by id
+- update user by id
+- get all users
+- delete user by id
+- delete all users
+- register a user
+- login as user
 
 ### Posts
-- Displays a list of all the user's posts
+- get post by id
+- create a post
+- update post by id
+- get all posts by user
+- get all posts
+- delete post by id
 
 ## Views
 ### Login
