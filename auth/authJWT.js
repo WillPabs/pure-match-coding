@@ -24,7 +24,7 @@ const verifyJWT = (req, res, next) => {
 
 const createJWT = (user) => {
     try {
-        const token = jwt.sign({ user: user}, config.secret, { expiresIn: '10s' });
+        const token = jwt.sign({ user: user}, config.secret, { expiresIn: config.jwtExpiration });
         return token;
     } catch (e) {
         console.log(e);
