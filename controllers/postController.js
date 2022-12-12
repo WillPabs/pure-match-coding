@@ -22,7 +22,6 @@ exports.post_create = async (req, res) => {
     try {
         const { post } = req.body;
         const { id } = req.user;
-        console.log("******USER",req)
         const newPost = await PostRepository.createPost(post, id);
         return res.status(201).json(newPost);
     } catch (e) {
