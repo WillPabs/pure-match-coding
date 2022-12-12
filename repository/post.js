@@ -9,7 +9,7 @@ class PostRepository {
         // this.db.sequelize.sync({ force: true }).then(() => {
         //     console.log("Drop and re-sync db.");
         // });
-        }
+    }
         
     async getAllPosts() {
         try {
@@ -43,15 +43,18 @@ class PostRepository {
         }
     }
 
-    async createPost(post) {
+    async createPost(post, userId) {
         let data = {};
         try {
             console.log('Creating post:::', post);
             data = await this.db.posts.create({
                 id: uuidv4(),
+                userId: userId,
                 title: post.title,
                 description: post.description,
-                photo: post.photo
+                photo: post.photo,
+                createdAt: Date.now(),
+                updatedAt: Date.now(),
             });
             console.log(data);
         } catch (e) {
