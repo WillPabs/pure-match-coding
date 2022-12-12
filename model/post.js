@@ -9,6 +9,13 @@ module.exports = (sequelize, DataTypes, Model) => {
             allowNull: false,
             unique: true,
         },
+        userId: {
+            type: DataTypes.UUID,
+            references: 'users',
+            referencesKey: 'id',
+            allowNull: false,
+            // unique: true,
+        },
         title: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -18,8 +25,16 @@ module.exports = (sequelize, DataTypes, Model) => {
             allowNull: false,
         },
         photo: {
-            type: DataTypes.STRING,
+            type: DataTypes.BLOB,
             allowNull: false,
+        },
+        createdAt: {
+            allowNull: false,
+            type: DataTypes.DATE,
+        },
+        updatedAt: {
+            allowNull: false,
+            type: DataTypes.DATE,
         }
     }, {
         sequelize,
