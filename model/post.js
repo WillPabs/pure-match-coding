@@ -11,10 +11,11 @@ module.exports = (sequelize, DataTypes, Model) => {
         },
         userId: {
             type: DataTypes.UUID,
-            references: 'users',
-            referencesKey: 'id',
+            references: { 
+                model: 'users',
+                key: 'id',
+            },
             allowNull: false,
-            // unique: true,
         },
         title: {
             type: DataTypes.STRING,
