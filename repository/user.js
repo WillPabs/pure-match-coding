@@ -1,4 +1,4 @@
-const { connect } = require("../db.config");
+const { connect } = require("../config/db.config");
 const { v4 : uuidv4 } = require('uuid');
 
 class UserRepository {
