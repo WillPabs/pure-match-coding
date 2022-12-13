@@ -53,6 +53,7 @@ exports.post_update = async (req, res) => {
     try {
         const { postId } = req.params;
         const { post } = req.body;
+        post.id = postId;
         const newPost = await PostRepository.updatePost(post);
         return res.status(200).send(newPost);
     } catch (e) {
