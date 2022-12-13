@@ -1,5 +1,6 @@
 const { connect } = require("../config/db.config");
 const { v4 : uuidv4 } = require('uuid');
+const { getTimeSinceCreated } = require("../helpers/date");
 
 class PostRepository {
     db = {}
@@ -61,10 +62,10 @@ class PostRepository {
                 updatedAt: Date.now(),
             });
             console.log(data);
+            return data;
         } catch (e) {
             console.log(e);   
         }
-        return data;
     }
 
     async updatePost(post) {
