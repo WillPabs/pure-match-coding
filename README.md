@@ -1,5 +1,7 @@
 # pure-match-coding
 
+# Req1
+
 ## Entity
 ### User
 - name
@@ -47,3 +49,12 @@
 
 ### Posts
 - A page containing a list of all posts created by the user.
+
+
+# Req2
+
+## Post
+- will have an attribute when created on
+- when the post is returned it will show the difference from when it was created
+- up to 5 photos max
+- can be edited and shows displays a message that it is edited
