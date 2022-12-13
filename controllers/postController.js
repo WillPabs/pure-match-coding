@@ -1,4 +1,5 @@
 const PostRepository = require('../repository/post');
+const { getTimeSinceCreated } = require('../helpers/date');
 
 exports.user_posts_list = async (req, res) => {
     try {
@@ -23,7 +24,8 @@ exports.post_create = async (req, res) => {
         const { post } = req.body;
         const { id } = req.user;
         const newPost = await PostRepository.createPost(post, id);
-        return res.status(201).json(newPost);
+        if (!newPost) return res.status(500).send({ message: 'Server Error'});
+        return res.status(201).send(newPost);
     } catch (e) {
         console.log(e);
         return res.send({ message: e });
@@ -42,6 +44,9 @@ exports.post_get = async (req, res) => {
             return res.status(404).send({ message: 'No Post Found' });
         }
 
+        const timeString = getTimeSinceCreated(post.createdAt);
+        console.log("IN CONTROLLER",timeString);
+        post.timeSinceCreated = timeString;
         return res.send(post);
     } catch (e) {
         console.log(e);
@@ -79,5 +84,5 @@ exports.post_delete = async (req, res) => {
 
 exports.all_users_posts = async (req, res) => {
     const posts = await PostRepository.getAllPosts();
-    return res.json(posts);
+    return res.send(posts);
 }
