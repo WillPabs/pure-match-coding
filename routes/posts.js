@@ -11,7 +11,7 @@ router.post('/', authJWT.verifyJWT, post_controller.post_create);
 
 router.get('/:postId', authJWT.verifyJWT, post_controller.post_get);
 
-router.put('/:postId', authJWT.verifyJWT, post_controller.post_update);
+router.patch('/:postId', authJWT.verifyJWT, post_controller.post_update);
 
 router.delete('/:postId', authJWT.verifyJWT, post_controller.post_delete);
 
