@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes, Model) => {
+module.exports = (sequelize, DataTypes) => {
     const Comments = sequelize.define('comment', {
         id: {
             type: DataTypes.UUID,

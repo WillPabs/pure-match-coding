@@ -25,6 +25,7 @@ const connect = () => {
     db.sequelize = sequelize;
     db.users = require('../model/user')(sequelize, DataTypes, Model);
     db.posts = require('../model/post')(sequelize, DataTypes, Model);
+    db.comments = require('../model/comment')(sequelize, DataTypes);
 
     return db;
 }
