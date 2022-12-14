@@ -1,6 +1,5 @@
 const { connect } = require("../config/db.config");
 const { v4 : uuidv4 } = require('uuid');
-const { getTimeSinceCreated } = require("../helpers/date");
 
 class PostRepository {
     db = {}
