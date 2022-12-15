@@ -4,7 +4,7 @@ const PostRepository = require('../repository/post');
 // get comment by id
 exports.comment_get = async (req, res) => {
     try {
-        const { commentId } = req.param;
+        const { commentId } = req.params;
         const { id } = req.user;
         console.log(id);
         console.log(commentId);
