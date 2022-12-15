@@ -1,5 +1,5 @@
 const CommentRepository = require('../repository/comment');
-const { getTimeSinceCreated } = require('../helpers/date');
+const PostRepository = require('../repository/post');
 
 // get comment by id
 exports.comment_get = async (req, res) => {
@@ -22,14 +22,14 @@ exports.comment_get = async (req, res) => {
 exports.all_post_comments = async (req, res) => {
     try {
         const { postId } = req.params;
-        console.log(req);
         const comments = await CommentRepository.getCommentsByPost(postId);
-        if (!comments) {
+        if (comments === null || comments === undefined || comments.length === 0) {
             return res.send({ message: 'Error finding post comments' });
         }
         return res.send(comments);
     } catch (e) {
-        
+        console.log(e);
+        return res.send({ message: e });
     }
 }
 // create comment
@@ -37,12 +37,9 @@ exports.comment_create = async (req, res) => {
     try {
         const { comment } = req.body;
         const { id } = req.user;
-        const postId = req.params;
-        console.log('PARAMS',postId)
+        const { postId } = req.params;
         console.log(comment);
-        comment.userId = id;
-        comment.postId = postId;
-        const c = await CommentRepository.createComment(comment);
+        const c = await CommentRepository.createComment(comment, id, postId);
         if (c === null || c === undefined) {
             return res.send({ message: 'Error can not create commment' });
         }
