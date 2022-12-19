@@ -58,3 +58,16 @@
 - when the post is returned it will show the difference from when it was created
 - up to 5 photos max
 - can be edited and shows displays a message that it is edited
+
+# Req3
+
+## Post
+- have multiple comments
+- has pagination
+
+## Comment
+- show the user who commented and comment
+- has pagination
+
+## User
+- can create a username
