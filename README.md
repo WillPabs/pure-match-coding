@@ -7,11 +7,17 @@
 - name
 - email
 - password
+- posts
 
 ### Post
 - title
 - description
 - photo
+- comments
+
+### Comment
+- user
+- text
 
 ## Routes
 ### Users
