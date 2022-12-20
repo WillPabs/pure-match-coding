@@ -1,6 +1,5 @@
 const UserRepository = require('../repository/user');
 const authJWT = require('../auth/authJWT');
-const config = require('../config/auth.config');
 
 exports.user_list = async (req, res) => {
     const data = await UserRepository.getUsers();
@@ -27,7 +26,16 @@ exports.user_get = async (req, res) => {
     res.json(data);
 }
 
-exports.user_login = async (req, res) => {
+exports.user_login_get = async (req, res) => {
+    try {
+        res.render('login');
+    } catch (e) {
+        console.log(e);
+        res.status(500).send({ message: 'Unable to get login page.'});
+    }
+}
+
+exports.user_login_post = async (req, res) => {
     try {
         console.log(req.body);
         const { email , password } = req.body;
