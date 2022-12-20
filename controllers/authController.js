@@ -30,7 +30,7 @@ exports.login_post = async (req, res) => {
 
         const token = authJWT.createJWT(user);
         res.cookie('id', token);
-        return res.status(200).redirect('/posts');
+        return res.status(200).redirect('../posts');
     } catch (e) {
         console.log(e);
         return res.status(500).send({ message: 'Error attempting to login' });
