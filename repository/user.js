@@ -6,10 +6,10 @@ class UserRepository {
 
     constructor() {
         this.db = connect();
-        // this.db.sequelize.sync({ force: true }).then(() => {
+        // this.db.sequelize.sync({ alter: true }).then(() => {
         //         console.log("Drop and re-sync db.");
-        //     });
-        }
+        // });
+    }
         
     async getUsers() {
         try {
