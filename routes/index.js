@@ -6,9 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { 
     title: 'Pure Match',
     loginText: 'Login',
-    loginRoute: '/login',
+    loginRoute: '/auth/login',
     registerText: 'Register',
-    registerRoute:  '/register',
+    registerRoute:  '/auth/register',
   });
 });
 

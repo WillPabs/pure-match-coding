@@ -3,3 +3,13 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  form(action="/auth/login", method="post") 
+    .form-element 
+      label(for="email") Email:
+      input(type="email" name="email" id="email" required)
+    .form-element 
+      label(for="password") Password:
+      input(type="password" name="password" id="password" required)
+    .form-element
+      input(type="submit" name="login" value="Login")
