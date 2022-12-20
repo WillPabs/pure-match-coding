@@ -27,6 +27,13 @@ const connect = () => {
     db.posts = require('../model/post')(sequelize, DataTypes, Model);
     db.comments = require('../model/comment')(sequelize, DataTypes);
 
+    db.users.hasMany(db.posts);
+    db.users.hasMany(db.comments);
+    db.posts.belongsTo(db.users);
+    db.posts.hasMany(db.comments);
+    db.comments.belongsTo(db.posts);
+    db.comments.belongsTo(db.users);
+
     return db;
 }
 
