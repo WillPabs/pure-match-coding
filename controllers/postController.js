@@ -13,19 +13,36 @@ exports.user_posts_list = async (req, res) => {
         if (!posts) {
             return res.send({message: 'No posts.'});
         }
-        return res.status(200).json(posts);
+        return res.status(200).render('posts', { 
+            title: 'Posts',
+            posts: posts
+        });
     } catch (e) {
         return res.send({ message: e });
     }
 };
 
+exports.get_create_post = async (req, res) => {
+    try {
+        res.render('createPost', {
+            title: 'Create A Post'
+        });
+    } catch (e) {
+        console.log(e);
+    }
+}
+
 exports.post_create = async (req, res) => {
     try {
-        const { post } = req.body;
+        const post = {};
+        const { title, description, photo } = req.body;
+        post.title = title;
+        post.description = description;
+        post.photo = photo;
         const { id } = req.user;
         const newPost = await PostRepository.createPost(post, id);
         if (!newPost) return res.status(500).send({ message: 'Server Error'});
-        return res.status(201).send(newPost);
+        return res.status(201).redirect('posts');
     } catch (e) {
         console.log(e);
         return res.send({ message: e });

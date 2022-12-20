@@ -3,3 +3,14 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  button(type="button" onclick='location.href="/posts/create"') Create A Post
+
+  ul
+    for post in posts
+      - const { title, description } = post
+      li
+        h4= title
+        p= description
+    else
+      li No Posts

@@ -9,6 +9,8 @@ router.get('/', authJWT.verifyJWT, post_controller.user_posts_list);
 
 router.post('/', authJWT.verifyJWT, post_controller.post_create);
 
+router.get('/create', authJWT.verifyJWT, post_controller.get_create_post);
+
 router.get('/:postId', authJWT.verifyJWT, post_controller.post_get);
 
 router.patch('/:postId', authJWT.verifyJWT, post_controller.post_update);

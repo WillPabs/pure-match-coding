@@ -3,3 +3,16 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+
+  form(action="/posts", method="post") 
+    .form-element 
+      label(for="title") Title:
+      input(type="title" name="title" id="title" required)
+    .form-element 
+      label(for="description") Description:
+      input(type="description" name="description" id="description" required)
+    .form-element 
+      label(for="photo") Photo:
+      input(type="photo" name="photo" id="photo")
+    .form-element
+      input(type="submit" name="createPost" value="Create Post")
