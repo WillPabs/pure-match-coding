@@ -13,6 +13,7 @@ exports.user_posts_list = async (req, res) => {
         if (!posts) {
             return res.send({message: 'No posts.'});
         }
+        console.log(posts);
         return res.status(200).render('posts', { 
             title: 'Posts',
             posts: posts

@@ -9,8 +9,10 @@ const verifyJWT = (req, res, next) => {
         if (token === null || token === undefined) 
             return res.status(403).send({ message: 'Please Login' });
         jwt.verify(token, secret, (err, user) => {
-            if (err) 
-                return res.status(401).send({ message: err});
+            if (err) {
+                console.log('Verification error')
+                return res.redirect('../auth/login');
+            }
             else {
                 req.user = user;
                 next();

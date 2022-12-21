@@ -6,9 +6,9 @@ class PostRepository {
 
     constructor() {
         this.db = connect();
-        // this.db.sequelize.sync({ alter: true }).then(() => {
-        //     console.log("Drop and re-sync db.");
-        // });
+        this.db.sequelize.sync({ alter: true }).then(() => {
+            console.log("Drop and re-sync db.");
+        });
     }
         
     async getAllPosts() {
@@ -26,7 +26,8 @@ class PostRepository {
             const found = await this.db.posts.findAll({
                 where: {
                     userId: userId
-                }
+                },
+                include: ['comments']
             });
             console.log(`***Posts by User:::`, found);
             return found;
@@ -38,7 +39,7 @@ class PostRepository {
 
     async getPostById(postId) {
         try {
-            const found = await this.db.posts.findByPk(postId);
+            const found = await this.db.posts.findByPk(postId, { include: ['comments']});
             console.log(`***Post:::`, found);
             return found;
         } catch (e) {
