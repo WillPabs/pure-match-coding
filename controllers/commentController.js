@@ -26,7 +26,8 @@ exports.all_post_comments = async (req, res) => {
         if (comments === null || comments === undefined || comments.length === 0) {
             return res.send({ message: 'Error finding post comments' });
         }
-        return res.send(comments);
+        console.log(comments);
+        return res.render('post', { post: comments });
     } catch (e) {
         console.log(e);
         return res.send({ message: e });
@@ -38,12 +39,12 @@ exports.comment_create = async (req, res) => {
         const { comment } = req.body;
         const { id } = req.user;
         const { postId } = req.params;
-        console.log(comment);
+        console.log(req.originalUrl);
         const c = await CommentRepository.createComment(comment, id, postId);
         if (c === null || c === undefined) {
             return res.send({ message: 'Error can not create commment' });
         }
-        return res.send(c);
+        return res.redirect(`/posts/${postId}`);
     } catch (e) {
         console.log(e);
         return res.send({ message: e });

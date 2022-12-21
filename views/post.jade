@@ -4,9 +4,17 @@ block content
   h1= post.title
   p= post.description
   span= post.timeSinceCreated
-
-  .create-comment
+  
+  form(action='/posts/#{post.id}/comments' method="post").create-comment
     label Add A Comment
-    input(type="text" name="comment" value="comment")
+    input(type="text" name="comment" placeholder="Write comment here...")
+    button(type="submit") Comment
+
+  ul
+    for comment in post.comments
+      li
+        p= comment.text
+    else
+      p No Comments
 
   
