@@ -10,7 +10,7 @@ const verifyJWT = (req, res, next) => {
         jwt.verify(token, secret, (err, user) => {
             if (err) {
                 console.log('Verification error')
-                return res.redirect('../auth/login');
+                return res.redirect('http://localhost:3000/auth/login');
             }
             else {
                 req.user = user;
