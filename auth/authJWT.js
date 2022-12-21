@@ -3,7 +3,6 @@ const config = require('../config/auth.config');
 
 const verifyJWT = (req, res, next) => {
     const token = req.cookies.id;
-    console.log("TOK:::",token);
     const secret = 'secretKey';
     try {
         if (token === null || token === undefined) 
