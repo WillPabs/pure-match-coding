@@ -26,7 +26,8 @@ class CommentRepository {
             const found = await this.db.comments.findAll({
                 where: {
                     postId: postId
-                }
+                },
+                include: ['post']
             });
             console.log(`***Comments by Post:::`, found);
             return found;
@@ -55,7 +56,7 @@ class CommentRepository {
                 id: uuidv4(),
                 postId: postId,
                 userId: userId,
-                text: comment.text,
+                text: comment,
                 createdAt: Date.now(),
                 updatedAt: Date.now(),
             });
