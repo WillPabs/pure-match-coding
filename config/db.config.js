@@ -29,7 +29,10 @@ const connect = () => {
 
     db.users.hasMany(db.posts);
     db.users.hasMany(db.comments);
-    db.posts.belongsTo(db.users);
+    db.posts.belongsTo(db.users, {
+        foreignKey: 'userId',
+        as: 'user'
+    });
     db.posts.hasMany(db.comments, {
         as: 'comments'
     });
