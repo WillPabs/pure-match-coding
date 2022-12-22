@@ -21,13 +21,15 @@ class CommentRepository {
         }
     }
 
-    async getCommentsByPost(postId) {
+    async getCommentsByPost(postId, limit, offset) {
         try {
             const found = await this.db.comments.findAll({
                 where: {
                     postId: postId
                 },
-                include: ['post']
+                include: ['post', 'user'],
+                limit: limit,
+                offset: offset
             });
             console.log(`***Comments by Post:::`, found);
             return found;
