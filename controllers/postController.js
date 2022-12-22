@@ -1,4 +1,5 @@
 const PostRepository = require('../repository/post');
+const CommentRepository = require('../repository/comment');
 const { getTimeSinceCreated } = require('../helpers/date');
 
 exports.user_posts_list = async (req, res) => {
@@ -51,6 +52,10 @@ exports.post_create = async (req, res) => {
 }
 
 exports.post_get = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 5;
+    const skip = (page - 1) * limit;
+
     try {
         const { postId } = req.params;
         if (postId === null || postId === undefined) {
@@ -62,11 +67,14 @@ exports.post_get = async (req, res) => {
             return res.status(404).send({ message: 'No Post Found' });
         }
 
+        const comments = await CommentRepository.getCommentsByPost(post.id, limit, page);
+        const totalPages = Math.ceil(comments.length / limit);
+        console.log("TOTAL PAGES:::",totalPages);
+
+
         const timeString = getTimeSinceCreated(post.createdAt);
-        console.log("IN CONTROLLER",timeString);
         post.timeSinceCreated = timeString;
-        console.log("USER::",req.user);
-        return res.render('post', { post: post });
+        return res.render('post', { post: post, comments: comments });
     } catch (e) {
         console.log(e);
         res.send({ message: e });
