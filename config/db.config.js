@@ -27,7 +27,9 @@ const connect = () => {
     db.posts = require('../model/post')(sequelize, DataTypes, Model);
     db.comments = require('../model/comment')(sequelize, DataTypes);
 
-    db.users.hasMany(db.posts);
+    db.users.hasMany(db.posts, {
+        as: 'posts'
+    });
     db.users.hasMany(db.comments);
     db.posts.belongsTo(db.users, {
         foreignKey: 'userId',
@@ -40,7 +42,10 @@ const connect = () => {
         foreignKey: 'postId',
         as: 'post'
     });
-    db.comments.belongsTo(db.users);
+    db.comments.belongsTo(db.users, {
+        foreignKey: 'userId',
+        as: 'user'
+    });
 
     return db;
 }
