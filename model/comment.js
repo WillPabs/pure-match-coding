@@ -6,22 +6,6 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             unique: true
         },
-        postId: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: { 
-                model: 'posts',
-                key: 'id',
-            },
-        },
-        userId: {
-            type: DataTypes.UUID,
-            allowNull: false,
-            references: { 
-                model: 'users',
-                key: 'id',
-            },
-        },
         text: {
             type: DataTypes.STRING,
             allowNull: false
@@ -33,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
     }, {
         sequelize,
         modelName: 'comments',
-        timestamps: false
+        timestamps: false,
+        include: ['user']
     })
 
     return Comments;
