@@ -35,6 +35,18 @@ exports.user_login_get = async (req, res) => {
     }
 }
 
+exports.user_profile = async (req, res) => {
+    try {
+        const { user } = req;
+        console.log(req.user);
+        const currentUser = await UserRepository.getUserById(user.id);
+        res.render('profile', { user: currentUser});
+    } catch (e) {
+        console.log(e);
+        res.status(500).send({ message: 'Unable to get user profile page.'});
+    }
+}
+
 exports.user_login_post = async (req, res) => {
     try {
         console.log(req.body);
@@ -55,6 +67,22 @@ exports.user_login_post = async (req, res) => {
     } catch (e) {
         console.log(e);
         return res.status(500).send({ message: 'Error attempting to login' });
+    }
+}
+
+exports.user_update = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const { user } = req.body;
+
+        user.id = userId;
+        user.updatedAt = Date.now();
+
+        const newUser = await PostRepository.updatePost(user);
+        return res.status(200).send(newUser);
+    } catch (e) {
+        console.log(e);
+        res.send({ message: e });
     }
 }
 
