@@ -1,0 +1,21 @@
+extends layout 
+
+block content 
+    h2 Update User Profile
+
+    form(action="/users/#{user.id}" method="patch")
+        .form-control
+            label(for="name") 
+            input(type="text" value="#{user.name}")
+        .form-control
+            label(for="username") 
+            input(type="text" value="#{user.username}")  
+        .form-control
+            label(for="email") 
+            input(type="text" value="#{user.email}" disabled)
+        .form-control
+            label(for="password") 
+            input(type="text" value="#{user.password}" disabled)
+        .form-control
+            input(type="submit" placeholder="Update User")
+        
