@@ -39,7 +39,7 @@ class PostRepository {
 
     async getPostById(postId) {
         try {
-            const found = await this.db.posts.findByPk(postId, { include: ['comments']});
+            const found = await this.db.posts.findByPk(postId, { include: ['comments', 'user']});
             console.log(`***Post:::`, found);
             return found;
         } catch (e) {
