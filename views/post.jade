@@ -2,17 +2,18 @@ extends layout
 
 block content
   h1= post.title
+  p= post.user.name
   p= post.description
   span= post.timeSinceCreated
-  
   form(action='/posts/#{post.id}/comments' method="post").create-comment
     label Add A Comment
     input(type="text" name="comment" placeholder="Write comment here...")
     button(type="submit") Comment
 
   ul
-    for comment in post.comments
+    for comment in comments
       li
+        p= comment.user.name
         p= comment.text
     else
       p No Comments
