@@ -65,6 +65,7 @@ exports.post_get = async (req, res) => {
         const timeString = getTimeSinceCreated(post.createdAt);
         console.log("IN CONTROLLER",timeString);
         post.timeSinceCreated = timeString;
+        console.log("USER::",req.user);
         return res.render('post', { post: post });
     } catch (e) {
         console.log(e);
